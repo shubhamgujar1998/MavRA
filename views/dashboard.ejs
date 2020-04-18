@@ -1,0 +1,78 @@
+<%- include ("./partials/header") %>
+
+<div class="container-fluid">
+    <div class="row navbar-expand-md">
+        <nav class="col-md-3 col-lg-2 bg-light navbar-collapse collapse sidebar" id="sidenav">
+            <div class="sidebar-sticky flex-column w-100 mt-1">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">
+                            <span data-feather="home"></span><i class="fas fa-tachometer-alt"></i> Dashboard <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../calendar">
+                            <span data-feather="file"></span><i class="fa fa-calendar-alt" aria-hidden="true"></i> Calendar
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <span data-feather="shopping-cart"></span><i class="far fa-comment-dots"></i> Chat
+                        </a>
+                    </li>
+  <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <span data-feather="shopping-cart"></span><i class="fas fa-tasks"></i> To-do List
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <span data-feather="users"></span><i class="fas fa-globe-americas"></i> Community Map
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <span data-feather="bar-chart-2"></span><i class="fas fa-file-alt"></i> Files
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <span data-feather="layers"></span><i class="fas fa-cogs"></i> Settings
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+  </div>
+<nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 navbar-expand-md">
+    <div class="navbar-brand d-flex align-items-center justify-content-between col-sm-12 col-md-2 mr-0">
+        <a class="mr-1 d-md-none text-light" href="#sidenav" data-toggle="collapse" data-target="#sidenav">
+            <span data-feather="menu" class="my-1"></span>
+        </a>
+        <a class="text-light" href="/"> <i class="fas fa-home"></i> MavRA</a>
+        <a class="navbar-toggler border-0 p-0" href="#topnav" data-toggle="collapse" data-target="#topnav">
+            <span data-feather="menu" class="my-1"></span>
+        </a>
+    </div>
+    <div class="navbar-collapse collapse justify-content-end" id="topnav">
+        <!-- <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search"> -->
+        <ul class="navbar-nav px-3 py-2 ">
+      <li class="nav-item">
+                <a class="nav-link float-right" href="#">Signed in as <span id="username"></span><i class="fas fa-user-plus"></i></a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<script>
+    let user = JSON.parse(sessionStorage.getItem('user'));
+    if(!user){
+        window.location = "http://localhost:3000";
+    }
+    console.log(sessionStorage.getItem('user'));
+    document.getElementById("username").innerHTML= user.displayName;
+
+</script>
+
+
+<%- include ("./partials/footer") %>
