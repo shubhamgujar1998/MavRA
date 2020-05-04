@@ -1,12 +1,14 @@
 var express = require("express"),
     app = express(),
     bodyParser = require("body-parser"),
-    mongoose = require('mongoose'),
+    path = require('path'),
+	mongoose = require('mongoose'),
     flash = require("connect-flash"),
     logger = require('morgan')
     methodOverride = require("method-override"),
     firebase = require("firebase");
     
+
 
 
 app.set("view engine", "ejs");  
@@ -15,8 +17,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 
 
-
-// Your web app's Firebase configuration
+// Web app's Firebase configuration
 var firebaseConfig = {
   apiKey: "AIzaSyDZNTsyONAQlE0c_EtoCcyYyZyRWpz6isI",
   authDomain: "mavra-2355b.firebaseapp.com",
@@ -29,85 +30,40 @@ var firebaseConfig = {
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
-var user = firebase.auth().currentUser;
+// var user = firebase.auth().currentUser;
+
+
+const db = firebase.firestore();
+
+
+// console.log(db.collection("Residents").where(firebase.firestore.FieldPath.documentId(), '==', "0000000000").get());
 
 
 
-
-
-
+// var ra = db.collection('Residents').doc('0000000000');
+// console.log(ra.first);
 
 
 app.get("/" ,function(req, res){
-  // function signInWithGoogle(){
-  //   var googleAuthProvider = new firebase.auth.GoogleAuthProvider();
-  //   // var userr = firebase.auth().currentUser; 
-  
-  //   firebase.auth().signInWithPopup(googleAuthProvider)
-  //   .then(function (data) {
-  //       console.log(data);
-  //       firebase.auth().onAuthStateChanged(function (user) {
-  //           if (user) {
-  //               console.log(user);
-  //               // window.location = "http://localhost:3000/dashboard";
-  //           } else {
-  //               // window.location = "http://localhost:3000"; 
-  //           }
-  //       });
-  //       console.log(data)
-  //     })
-  //   .catch(function (err) {
-  //       console.log(err)
-  //     })
-  // }
-
-
-
   res.render("signin");
-
 });
 
+
 app.get("/pi", function(req, res){
-  res.send("<h1> HELLO </h1><button> Sign IN </button>")
+    res.sendFile(path.join(__dirname + '/Items.html'));
 })
 
 
 app.get("/dashboard", function(req, res){
-  
-// check if user is already logged in
-res.render("dashboard");
-
-// redirect to dashboard page if user is logged in
-// if (user != null) {
-//   res.render("dashboard");
-//   user.providerData.forEach(function (profile) {
-//     console.log("Sign-in provider: " + profile.providerId);
-//     console.log("  Provider-specific UID: " + profile.uid);
-//     console.log("  Name: " + profile.displayName);
-//     console.log("  Email: " + profile.email);
-//     console.log("  Photo URL: " + profile.photoURL);
-//   });
-// }
-
-
-
-  // if (user.uid.length > 0) {
-  //   res.render("landing");
-  //   // User is signed in.
-  // } else {
-  //   res.redirect("landing");
-  //   // No user is signed in.
-  // }
-    
+  res.render("dashboard");
 });
 
 
 
-
 app.get("/calendar", function (req, res){
+  console.log(req.params.body);
 	res.render("calendar");
 })
-
 
 
 app.listen(process.env.PORT || 3000, function(){

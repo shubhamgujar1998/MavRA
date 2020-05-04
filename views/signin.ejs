@@ -55,27 +55,26 @@
                 </div>
             </div>
             <div class="card-body">
-                <form>
+ 
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="fas fa-user"></i></span>
                         </div>
-                        <input type="text" class="form-control" placeholder="username">
+                        <input type="text" id="username" class="form-control" placeholder="username">
                         
                     </div>
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="fas fa-key"></i></span>
                         </div>
-                        <input type="password" class="form-control" placeholder="password">
+                        <input type="password" id="password" class="form-control" placeholder="password">
                     </div>
                     <div class="row align-items-center remember">
                         <input type="checkbox">Remember Me
                     </div>
                     <div class="form-group">
-                        <input type="submit" value="Login" class="btn float-right login_btn">
+                        <button onclick="signinwithnormaluser()" class="btn float-right login_btn">Sign In</button>
                     </div>
-                </form>
             </div>
         </div>
     </div>
@@ -83,32 +82,59 @@
 
 
 
-
 <script> 
-
     function signInWithGoogle(){
         var googleAuthProvider = new firebase.auth.GoogleAuthProvider();
         // var userr = firebase.auth().currentUser; 
-
+        
         firebase.auth().signInWithPopup(googleAuthProvider)
         .then(function (data) {
-            console.log("1"+data);
             firebase.auth().onAuthStateChanged(function (user) {
                 if (user) {
-                    console.log(user);
-                   // document.cookie =user;
+                    document.cookie = user;
                     sessionStorage.setItem('user', JSON.stringify(user));
                     window.location = "http://localhost:3000/dashboard";
                 } else {
-                    // window.location = "http://localhost:3000"; 
+
                 }
             });
-            console.log("2"+data)
           })
         .catch(function (err) {
-            console.log(err)
+            console.log(err);
           })
     }
+
+
+
+    function signinwithnormaluser (){
+        var email = document.getElementById("username").value;
+        var password = document.getElementById("password").value;
+        console.log(email+ ":   PAssword: " + password);
+        firebase.auth().signInWithEmailAndPassword(email, password)
+        .then((user)=>{
+            console.log(user);
+                if (user) {
+                    console.log(user);
+                    document.cookie = user;
+                    sessionStorage.setItem('user', JSON.stringify(user.user));
+                    window.location = "http://localhost:3000/dashboard";
+                } else {
+
+        }})
+        .catch(function(error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        if (errorCode === 'auth/wrong-password') {
+            alert('Wrong password.');
+        } else {
+            alert(errorMessage);
+        }
+        console.log(error);
+        });
+    }
+
+
 </script>
 </body>
 </html>

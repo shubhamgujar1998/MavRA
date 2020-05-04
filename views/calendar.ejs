@@ -1,5 +1,77 @@
 <%- include ("./partials/header") %>
 
+
+<div class="container-fluid">
+  <div class="row navbar-expand-md">
+      <nav class="col-md-3 col-lg-2 bg-light navbar-collapse collapse sidebar" id="sidenav">
+          <div class="sidebar-sticky flex-column w-100 mt-1">
+              <ul class="nav flex-column">
+                  <li class="nav-item">
+                      <a class="nav-link active" href="/dashboard">
+                          <span data-feather="home"></span><i class="fas fa-tachometer-alt"></i> Dashboard 
+                      </a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="/calendar">
+                          <span data-feather="file"></span><i class="fa fa-calendar-alt" aria-hidden="true"></i> Calendar 
+                      </a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="#">
+                          <span data-feather="shopping-cart"></span><i class="far fa-comment-dots"></i> Chat
+                      </a>
+                  </li>
+<li class="nav-item">
+                      <a class="nav-link" href="#">
+                          <span data-feather="shopping-cart"></span><i class="fas fa-tasks"></i> To-do List
+                      </a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="#">
+                          <span data-feather="users"></span><i class="fas fa-globe-americas"></i> Community Map
+                      </a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="#">
+                          <span data-feather="bar-chart-2"></span><i class="fas fa-file-alt"></i> Files
+                      </a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="#">
+                          <span data-feather="layers"></span><i class="fas fa-cogs"></i> Settings
+                      </a>
+                  </li>
+              </ul>
+          </div>
+      </nav>
+  </div>
+</div>
+<nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 navbar-expand-md">
+  <div class="navbar-brand d-flex align-items-center justify-content-between col-sm-12 col-md-2 mr-0">
+      <a class="mr-1 d-md-none text-light" href="#sidenav" data-toggle="collapse" data-target="#sidenav">
+          <span data-feather="menu" class="my-1"></span>
+      </a>
+      <a class="text-light" href="/dashboard"> <i class="fas fa-home"></i> MavRA</a>
+      <a class="navbar-toggler border-0 p-0" href="#topnav" data-toggle="collapse" data-target="#topnav">
+          <span data-feather="menu" class="my-1"></span>
+      </a>
+  </div>
+  <div class="navbar-collapse collapse justify-content-end" id="topnav">
+      <!-- <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search"> -->
+      <ul class="navbar-nav px-3 py-2 ">
+          <li class="nav-item">
+              <a class="nav-link float-right" href="#">Signed in as <span id="username"></span><i class="fas fa-user-plus"></i></a>
+          </li>
+          
+          <li class="nav-item" id="logout">
+              <a class="nav-link float-right" id="logmeout" href="http://localhost:3000">Logout</a>
+          </li>
+      </ul>
+  </div>
+</nav>
+
+
+<!-- 
 <script>
 const fs = require('fs');
 const readline = require('readline');
@@ -95,11 +167,60 @@ function listEvents(auth) {
     }
   });
 }
-</script>
+</script> -->
 
-<div id="calendar"></div>
+<div id="calendar">
+
+</div>
+<button type="button" style="margin-left: 680px; margin-top: 10px;" class="btn btn-info" data-toggle="modal" data-target="#exampleModal">
+    Create Event
+</button>
+  <!-- <button type="button" class="btn">
+    Launch demo modal
+  </button> -->
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="exampleModalLabel" style="color: black;">Add event details:</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="/calendar" method="POST" name="myform">
+
+          <label for="eventname" style="color: black;">Event name: </label>
+          <input type="text" name="eventname" id="eventname">
+
+          <label for="date" style="color: black;">Date: </label>
+          <input type="date" name="date" id="date">          
+          
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <a href="javascript:submitform()" class="btn btn-primary">Submit</a>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 <script>
+
+function submitform()
+{
+    if(document.myform.onsubmit &&
+    !document.myform.onsubmit())
+    {
+      return;
+    }
+ document.myform.submit();
+}
+
 !function() {
 
 var today = moment();
@@ -157,7 +278,9 @@ Calendar.prototype.drawMonth = function() {
   var self = this;
   
   this.events.forEach(function(ev) {
-   ev.date = self.current.clone().date(Math.random() * (29 - 1) + 1);
+    var rand = (Math.random() * (29 - 1) + 1);
+   ev.date = self.current.clone().date(rand);
+   console.log(ev.date,(rand));
   });
   
   
@@ -165,7 +288,7 @@ Calendar.prototype.drawMonth = function() {
     this.oldMonth = this.month;
     this.oldMonth.className = 'month out ' + (self.next ? 'next' : 'prev');
     this.oldMonth.addEventListener('webkitAnimationEnd', function() {
-      self.oldMonth.parentNode.removeChild(self.oldMonth);
+    self.oldMonth.parentNode.removeChild(self.oldMonth);
       self.month = createElement('div', 'month');
       self.backFill();
       self.currentMonth();
@@ -233,6 +356,7 @@ Calendar.prototype.drawDay = function(day) {
   var outer = createElement('div', this.getDayClass(day));
   outer.addEventListener('click', function() {
     self.openDay(this);
+  
   });
 
   //Day Name
@@ -424,24 +548,24 @@ function createElement(tagName, className, innerText) {
 !function() {
 var data = [
   { eventName: 'Lunch Meeting w/ Mark', calendar: 'Work', color: 'orange' },
-  { eventName: 'Interview - Jr. Web Developer', calendar: 'Work', color: 'orange' },
-  { eventName: 'Demo New App to the Board', calendar: 'Work', color: 'orange' },
-  { eventName: 'Dinner w/ Marketing', calendar: 'Work', color: 'orange' },
+  // { eventName: 'Interview - Jr. Web Developer', calendar: 'Work', color: 'orange' },
+  // { eventName: 'Demo New App to the Board', calendar: 'Work', color: 'orange' },
+  // { eventName: 'Dinner w/ Marketing', calendar: 'Work', color: 'orange' },
 
-  { eventName: 'Game vs Portalnd', calendar: 'Sports', color: 'blue' },
-  { eventName: 'Game vs Houston', calendar: 'Sports', color: 'blue' },
-  { eventName: 'Game vs Denver', calendar: 'Sports', color: 'blue' },
-  { eventName: 'Game vs San Degio', calendar: 'Sports', color: 'blue' },
+  // { eventName: 'Game vs Portalnd', calendar: 'Sports', color: 'blue' },
+  // { eventName: 'Game vs Houston', calendar: 'Sports', color: 'blue' },
+  // { eventName: 'Game vs Denver', calendar: 'Sports', color: 'blue' },
+  // { eventName: 'Game vs San Degio', calendar: 'Sports', color: 'blue' },
 
-  { eventName: 'School Play', calendar: 'Kids', color: 'yellow' },
-  { eventName: 'Parent/Teacher Conference', calendar: 'Kids', color: 'yellow' },
-  { eventName: 'Pick up from Soccer Practice', calendar: 'Kids', color: 'yellow' },
-  { eventName: 'Ice Cream Night', calendar: 'Kids', color: 'yellow' },
+  // { eventName: 'School Play', calendar: 'Kids', color: 'yellow' },
+  // { eventName: 'Parent/Teacher Conference', calendar: 'Kids', color: 'yellow' },
+  // { eventName: 'Pick up from Soccer Practice', calendar: 'Kids', color: 'yellow' },
+  // { eventName: 'Ice Cream Night', calendar: 'Kids', color: 'yellow' },
 
-  { eventName: 'Free Tamale Night', calendar: 'Other', color: 'green' },
-  { eventName: 'Bowling Team', calendar: 'Other', color: 'green' },
-  { eventName: 'Teach Kids to Code', calendar: 'Other', color: 'green' },
-  { eventName: 'Startup Weekend', calendar: 'Other', color: 'green' }
+  // { eventName: 'Free Tamale Night', calendar: 'Other', color: 'green' },
+  // { eventName: 'Bowling Team', calendar: 'Other', color: 'green' },
+  // { eventName: 'Teach Kids to Code', calendar: 'Other', color: 'green' },
+  // { eventName: 'Startup Weekend', calendar: 'Other', color: 'green' }
 ];
 
 
@@ -456,7 +580,30 @@ var calendar = new Calendar('#calendar', data);
 
 
 
+</script>
 
+<script>
+  let user = JSON.parse(sessionStorage.getItem('user'));
+  var uid = user.uid;
+  // console.log(uid);
+  if(!user){
+      window.location = "http://localhost:3000";
+      document.getElementById("logout").style.display = "none";
+  }
+  document.getElementById("username").innerHTML = user.email;
+  const logout = document.querySelector("#logmeout");
+  logout.addEventListener('click', e => {
+      e.preventDefault();
+      firebase.auth().signOut()
+          .then(function () {
+              sessionStorage.removeItem('user');
+              sessionStorage.clear();
+              console.log(user.displayName + " has signed out.");
+              window.location = "http://localhost:3000";
+          }).catch(function (error) {
+              // An error happened.
+          });
+  })
 </script>
 
 <%- include ("./partials/footer") %>
