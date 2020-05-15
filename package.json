@@ -16,7 +16,6 @@
     "express": "^4.17.1",
     "express-session": "^1.17.0",
     "firebase": "^7.14.0",
-    "firebase-admin": "^8.10.0",
     "firebase-tools": "^7.15.1",
     "firebaseui": "^4.5.0",
     "method-override": "^3.0.0",

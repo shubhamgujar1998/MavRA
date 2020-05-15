@@ -1,7 +1,6 @@
 var express = require("express"),
     app = express(),
     bodyParser = require("body-parser"),
-    path = require('path'),
     flash = require("connect-flash"),
     methodOverride = require("method-override");
     firebase = require("firebase");
@@ -68,18 +67,14 @@ app.get("/" ,function(req, res){
   res.render("signin");
 });
 
-
-// app.get("/pi", function(req, res){
-//   res.sendFile(path.join(__dirname + '/Items.html'));
-// })
-
-
+// Dashboard 
 app.get("/dashboard", function(req, res){
   res.render("dashboard");
 });
 
 
 
+// Calendar
 app.get("/calendar", function (req, res){
 	res.render("calendar", {users: "sendData"});
 })
@@ -89,10 +84,11 @@ app.post("/calendar", function(req, res){
 });
 
 
+
+// Community Map renders
 app.get("/communitymap", function(req, res){
   res.render("communitymap");
 })
-
 
 app.get("/read_data", function(req, res){
   res.render("read_data");
@@ -103,7 +99,7 @@ app.get("/upload_files", function(req, res){
 })
 
 
-
+// NODE server starting on this port
 app.listen(process.env.PORT || 3000, function(){
   console.log("MavRA has started");
 });
