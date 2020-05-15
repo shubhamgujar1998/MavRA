@@ -109,12 +109,10 @@
     function signinwithnormaluser (){
         var email = document.getElementById("username").value;
         var password = document.getElementById("password").value;
-        console.log(email+ ":   PAssword: " + password);
         firebase.auth().signInWithEmailAndPassword(email, password)
         .then((user)=>{
             console.log(user);
                 if (user) {
-                    console.log(user);
                     document.cookie = user;
                     sessionStorage.setItem('user', JSON.stringify(user.user));
                     window.location = "http://localhost:3000/dashboard";

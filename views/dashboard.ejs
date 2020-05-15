@@ -26,7 +26,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="../communitymap">
                             <span data-feather="users"></span><i class="fas fa-globe-americas"></i> Community Map
                         </a>
                     </li>
@@ -75,8 +75,6 @@
         document.getElementById("logout").style.display = "none";
     }
     document.getElementById("username").innerHTML = user.email;
-    // document.getElementById("logout").sessionStorage.removeItem('user');
-    // document.getElementById("logout") = sessionStorage.clear();
     const logout = document.querySelector("#logmeout");
     logout.addEventListener('click', e => {
         e.preventDefault();

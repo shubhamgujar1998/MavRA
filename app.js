@@ -2,17 +2,15 @@ var express = require("express"),
     app = express(),
     bodyParser = require("body-parser"),
     path = require('path'),
-	mongoose = require('mongoose'),
     flash = require("connect-flash"),
-    logger = require('morgan')
-    methodOverride = require("method-override"),
+    methodOverride = require("method-override");
     firebase = require("firebase");
+    // require("firebase/firestore");
     
-
-
 
 app.set("view engine", "ejs");  
 app.use(express.static(__dirname + "/public"));
+app.use(express.static(__dirname + "/scripts"));
 app.use(bodyParser.urlencoded({extended: true}));
 
 
@@ -35,13 +33,35 @@ firebase.initializeApp(firebaseConfig);
 
 const db = firebase.firestore();
 
+// var sendData = db.collection("users");
+
 
 // console.log(db.collection("Residents").where(firebase.firestore.FieldPath.documentId(), '==', "0000000000").get());
 
+// var data = 
+//   {        
+//     eventName: ["Play", "EAT", "SLEEP"],
+//     date: ["2020-09-11", "2019-05-30", "2015-09-10"]
+//   };
 
+// // var ra = db.collection('Residents').doc('0000000000');
+// // console.log(ra.first);
 
-// var ra = db.collection('Residents').doc('0000000000');
-// console.log(ra.first);
+//   db.collection("users").doc("seniormavra@gmail.com").set(data);//,
+      // {
+      //   eventName: "PLay",
+      //   date: "2020-06-09"
+      // },
+      // {
+      //   eventName: "SLeep",
+      //   date: "2020-07-09"
+      // },
+      // {
+      //   eventName: "Eat",
+      //   date: "2020-08-09"
+      // }
+    
+    
 
 
 app.get("/" ,function(req, res){
@@ -49,9 +69,9 @@ app.get("/" ,function(req, res){
 });
 
 
-app.get("/pi", function(req, res){
-    res.sendFile(path.join(__dirname + '/Items.html'));
-})
+// app.get("/pi", function(req, res){
+//   res.sendFile(path.join(__dirname + '/Items.html'));
+// })
 
 
 app.get("/dashboard", function(req, res){
@@ -61,11 +81,29 @@ app.get("/dashboard", function(req, res){
 
 
 app.get("/calendar", function (req, res){
-  console.log(req.params.body);
-	res.render("calendar");
+	res.render("calendar", {users: "sendData"});
+})
+
+app.post("/calendar", function(req, res){
+  res.render("calendar");
+});
+
+
+app.get("/communitymap", function(req, res){
+  res.render("communitymap");
 })
 
 
+app.get("/read_data", function(req, res){
+  res.render("read_data");
+})
+
+app.get("/upload_files", function(req, res){
+  res.render("upload_files");
+})
+
+
+
 app.listen(process.env.PORT || 3000, function(){
-       console.log("MavRA has started");
+  console.log("MavRA has started");
 });
