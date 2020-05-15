@@ -99,6 +99,11 @@ app.get("/upload_files", function(req, res){
 })
 
 
+// To-do list
+app.get("/todo", function(req, res){
+  res.render("todo");
+})
+
 // NODE server starting on this port
 app.listen(process.env.PORT || 3000, function(){
   console.log("MavRA has started");
