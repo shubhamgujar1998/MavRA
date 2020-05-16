@@ -1,6 +1,3 @@
-/* Juan Diego Gonzalez German
-ID: 1001401837 */
-
 body {
   background-color: whitesmoke;
 }
@@ -17,6 +14,12 @@ ul {
   background-color: #0064b1;
 }
   
+
+.list-group{
+  margin-top: 20px;
+}
+
+
 li {
   float: left;
 }
@@ -34,6 +37,3 @@ li a:hover {
   background-color: #f58025;
 }
 
-  /* select{
-    overflow-y: auto;
-  } */

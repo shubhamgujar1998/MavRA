@@ -4,12 +4,12 @@ var express = require("express"),
     flash = require("connect-flash"),
     methodOverride = require("method-override");
     firebase = require("firebase");
-    // require("firebase/firestore");
     
 
 app.set("view engine", "ejs");  
 app.use(express.static(__dirname + "/public"));
 app.use(express.static(__dirname + "/scripts"));
+app.use(express.static(__dirname + "/images"));
 app.use(bodyParser.urlencoded({extended: true}));
 
 
@@ -27,40 +27,6 @@ var firebaseConfig = {
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
-// var user = firebase.auth().currentUser;
-
-
-const db = firebase.firestore();
-
-// var sendData = db.collection("users");
-
-
-// console.log(db.collection("Residents").where(firebase.firestore.FieldPath.documentId(), '==', "0000000000").get());
-
-// var data = 
-//   {        
-//     eventName: ["Play", "EAT", "SLEEP"],
-//     date: ["2020-09-11", "2019-05-30", "2015-09-10"]
-//   };
-
-// // var ra = db.collection('Residents').doc('0000000000');
-// // console.log(ra.first);
-
-//   db.collection("users").doc("seniormavra@gmail.com").set(data);//,
-      // {
-      //   eventName: "PLay",
-      //   date: "2020-06-09"
-      // },
-      // {
-      //   eventName: "SLeep",
-      //   date: "2020-07-09"
-      // },
-      // {
-      //   eventName: "Eat",
-      //   date: "2020-08-09"
-      // }
-    
-    
 
 
 app.get("/" ,function(req, res){
