@@ -4,8 +4,32 @@
   vertical-align: text-bottom;
 }
 
-.card, .btn, .form-control {
+/* .card, .btn, .form-control {
     border-radius: 0;
+} */
+
+
+.container{
+  margin-right: 50px;
+}
+
+
+div.card {
+ margin-top: 5%; 
+ margin-left: 500px;
+}
+
+.change {
+  background-color: orange;
+}
+
+.changeheight{
+  height: 222px;
+}
+
+
+.changecolor{
+  background-color: #5fcfc2;
 }
 
 /*

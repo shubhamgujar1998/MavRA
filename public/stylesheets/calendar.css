@@ -42,9 +42,9 @@
    -webkit-transform: translate3d(0, 0, 0);
    -moz-transform: translate3d(0, 0, 0);
    transform: translate3d(0, 0, 0);
-   width: 420px;
-   margin: 0 auto;
-   height: 650px;
+   margin-left: 250px;
+   padding-right: 10px;
+   height: 720px;
    overflow: hidden;
  }
  

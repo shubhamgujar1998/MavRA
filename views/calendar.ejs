@@ -1,17 +1,64 @@
-<!-- TAKEN REFERENCE FROM https://codepen.io/peanav/pen/ulkof -->
+<%- include ("./partials/header") %>
 
-<!DOCTYPE html>
-<html>
-<head>
-  <title>MavRA</title>
+  <div class="container-fluid">
+    <div class="row navbar-expand-md">
+        <nav class="col-md-3 col-lg-2 bg-light navbar-collapse collapse sidebar" id="sidenav">
+            <div class="sidebar-sticky flex-column w-100 mt-1">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/dashboard">
+                            <span data-feather="home"></span><i class="fas fa-tachometer-alt"></i> Dashboard <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../calendar">
+                            <span data-feather="file"></span><i class="fa fa-calendar-alt" aria-hidden="true"></i> Calendar
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../todo">
+                            <span data-feather="shopping-cart"></span><i class="fas fa-tasks"></i> To-do List
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../communitymap">
+                            <span data-feather="users"></span><i class="fas fa-globe-americas"></i> Community Map
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="upload_files">
+                            <span data-feather="bar-chart-2"></span><i class="fas fa-file-alt"></i> Files
+                        </a>
+                    </li>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<link rel="stylesheet" type="text/css" href="/stylesheets/calendar.css">
-
-</head>
-<body>
-
+                </ul>
+            </div>
+        </nav>
+    </div>
+  </div>
+<nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 navbar-expand-md">
+    <div class="navbar-brand d-flex align-items-center justify-content-between col-sm-12 col-md-2 mr-0">
+        <a class="mr-1 d-md-none text-light" href="#sidenav" data-toggle="collapse" data-target="#sidenav">
+            <span data-feather="menu" class="my-1"></span>
+        </a>
+        <a class="text-light" href="/dashboard"> <i class="fas fa-home"></i> MavRA</a>
+        <a class="navbar-toggler border-0 p-0" href="#topnav" data-toggle="collapse" data-target="#topnav">
+            <span data-feather="menu" class="my-1"></span>
+        </a>
+    </div>
+    <div class="navbar-collapse collapse justify-content-end" id="topnav">
+        <!-- <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search"> -->
+        <ul class="navbar-nav px-3 py-2 ">
+            <li class="nav-item">
+                <a class="nav-link float-right" href="#">Signed in as <span id="username"></span><i class="fas fa-user-plus"></i></a>
+            </li>
+           
+            <li class="nav-item" id="logout">
+                <a class="nav-link float-right" id="logmeout" href="http://localhost:3000">Logout</a>
+            </li>
+        </ul>
+    </div>
+</nav>
 
 <div id="calendar"></div>
 
@@ -522,7 +569,7 @@ function myFunc() {
  
     return ele;
   }
-  
+ 
   var eventName = document.myForm.eventName.value;
   var eventType = document.myForm.eventType.value;
   var eventColor = "";
@@ -541,7 +588,7 @@ function myFunc() {
     default:
       eventColor = "green";
   }
-  
+ 
   var data = JSON.parse(sessionStorage.getItem("data"));
 
   if (data == null) data = [];
@@ -578,7 +625,7 @@ function myFunc() {
       /*for(var z in data)
                           console.log(z);*/
 sessionStorage.setItem("data", JSON.stringify(data));
-      
+     
   for (var a of data) {
     console.log(a);
   }
@@ -603,6 +650,28 @@ sessionStorage.setItem("data", JSON.stringify(data));
 }
 
 
+</script>
+
+<script>
+  let user = JSON.parse(sessionStorage.getItem('user'));
+  if(!user){
+      window.location = "http://localhost:3000";
+      document.getElementById("logout").style.display = "none";
+  }
+  document.getElementById("username").innerHTML = user.email;
+  const logout = document.querySelector("#logmeout");
+  logout.addEventListener('click', e => {
+      e.preventDefault();
+      firebase.auth().signOut()
+          .then(function () {
+              sessionStorage.removeItem('user');
+              sessionStorage.clear();
+              console.log(user.displayName + " has signed out.");
+              window.location = "http://localhost:3000";
+          }).catch(function (error) {
+              // An error happened.
+          });
+  })
 </script>
 
 </body>

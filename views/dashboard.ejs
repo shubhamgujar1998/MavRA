@@ -15,12 +15,8 @@
                             <span data-feather="file"></span><i class="fa fa-calendar-alt" aria-hidden="true"></i> Calendar
                         </a>
                     </li>
+
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <span data-feather="shopping-cart"></span><i class="far fa-comment-dots"></i> Chat
-                        </a>
-                    </li>
-  <li class="nav-item">
                         <a class="nav-link" href="../todo">
                             <span data-feather="shopping-cart"></span><i class="fas fa-tasks"></i> To-do List
                         </a>
@@ -31,15 +27,11 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="upload_files">
                             <span data-feather="bar-chart-2"></span><i class="fas fa-file-alt"></i> Files
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <span data-feather="layers"></span><i class="fas fa-cogs"></i> Settings
-                        </a>
-                    </li>
+
                 </ul>
             </div>
         </nav>
@@ -61,13 +53,85 @@
             <li class="nav-item">
                 <a class="nav-link float-right" href="#">Signed in as <span id="username"></span><i class="fas fa-user-plus"></i></a>
             </li>
-            
+           
             <li class="nav-item" id="logout">
                 <a class="nav-link float-right" id="logmeout" href="http://localhost:3000">Logout</a>
             </li>
         </ul>
     </div>
 </nav>
+
+
+<div class="container">
+<div class="card-deck">
+    <div class="card bg-primary column col-lg-4 col-centered">
+      <img class="card-img-top" src="https://lh3.googleusercontent.com/proxy/UrR6QiAYKss0H6VtxtFDzPWWcYn3adgUp9oQIzuVvGQp1kpFg5FcDLSVZ77LR_VEmM-CBWcU45adVHbs1Itsdky7YpGQVKq_zFnsfny_4saIkSlMR-pchVT-NxDbXxtajy6xQLV7Ks6vxNCXo8WGL8BhtAPig-0SVo7j-Ly0a-6DxfI" alt="Card image cap">  
+      <div class="card-body text-center">
+        <a href="./calendar" class="btn change">Visit Calendar</a>
+      </div>
+    </div>
+
+    <div class="card changecolor column col-lg-4 col-rightcentered">
+        <img class="card-img-top" src="https://www.workflowmax.com/hubfs/6-things-to-do-list-listing.png">
+        <div class="card-body text-center">
+            <a href="./todo" class="btn change">Visit Todo list</a>
+        </div>
+    </div>
+<!-- https://cdn.pixabay.com/photo/2017/03/31/17/44/avatar-2191932__340.png -->
+    <div class="card bg-success column col-lg-4 col-centered">
+        <img class="card-img-top changeheight" src="https://lh3.googleusercontent.com/proxy/qGOorAWh5hfvcnkMl_J1YpgpZuq9B3GT6GQSuT291x5o9-prAHhJoDAxfv5bcscXPDO_HleMiSmgz0Yni3yH4vMg8CEulO2OxG1KCtJIeenKSa9M897PHn4">
+        <div class="card-body text-center">
+            <a href="./communitymap" class="btn change">Visit Community Map</a>
+        </div>
+    </div>
+    <div class="card bg-danger column col-lg-4 col-rightcentered">
+        <img class="card-img-top" src="https://content.etilize.com/images/200/11963020.jpg">
+        <div class="card-body text-center">
+            <a href="./upload_files" class="btn change">Visit Files</a>
+        </div>
+    </div>
+  </div>
+</div>
+
+<!-- <div class="grid">
+    <div class="card">
+        <img class="card-img-top" src="https://lh3.googleusercontent.com/proxy/UrR6QiAYKss0H6VtxtFDzPWWcYn3adgUp9oQIzuVvGQp1kpFg5FcDLSVZ77LR_VEmM-CBWcU45adVHbs1Itsdky7YpGQVKq_zFnsfny_4saIkSlMR-pchVT-NxDbXxtajy6xQLV7Ks6vxNCXo8WGL8BhtAPig-0SVo7j-Ly0a-6DxfI" alt="Card image cap">
+        <div class="card-body">
+            <a href="./calendar" class="btn btn-primary">Visit Calendar</a>
+        </div>
+    </div>
+    <div class="card">
+        <img class="card-img-top" src="https://www.workflowmax.com/hubfs/6-things-to-do-list-listing.png">
+        <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <a href="#" class="btn btn-primary">Visit Community Map</a>
+        </div>
+    </div>
+</div> -->
+<!-- <div class="row"> -->
+    <!-- <div class="column col-lg-4 col-centered" style="background-color:#aaa;">
+    <h2>Column 1</h2>
+    <p>Some text..</p>
+    </div>
+    <div class="column col-lg-4 col-rightcentered" style="background-color:#bbb;">
+    <h2>Column 2</h2>
+    <p>Some text..</p>
+    </div> -->
+    <!-- <div class="column col-lg-4 col-centered" style="background-color:#ccc;">
+    <h2>Column 3</h2>
+    <p>Some text..</p>
+    </div>
+    <div class="column col-lg-4 col-rightcentered" style="background-color:#ddd;">
+    <h2>Column 4</h2>
+    <p>Some text..</p>
+    </div> -->
+  <!-- </div> -->
+
+
+
+
+
 <script>
     let user = JSON.parse(sessionStorage.getItem('user'));
     if(!user){
