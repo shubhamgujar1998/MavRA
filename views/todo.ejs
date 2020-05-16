@@ -1,24 +1,59 @@
-<%- include ("./partials/header") %>
 
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <link rel="stylesheet" href="/stylesheets/todos.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To do list</title>
+    <link rel="icon" href="to-do-list.png" type="image/png">
+    <link rel="stylesheet" href="../stylesheets/todos.css" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
-        <nav class="navbar ">
-            <form class="form-inline">
-            <a class="btn btn-primary" href="./dashboard" type="button">Back to Dashboard</a>
-            
-            </form>
-        </nav>
 
-        <div id="container">
-        <h1>To-Do List<i class="fas fa-angle-down"></i></h1>
-        <input type="text" placeholder="Add New Todo">
-        <ul>
-            <li><span> <i class="fa fa-trash"></i> </span> Play Football</li>
-            <li><span> <i class="fa fa-trash"></i> </span> Study JS</li>
-            <li><span> <i class="fa fa-trash"></i> </span> Trip to Austin</li>
-        </ul>
-    </div>
+<body>
+
+    <button onclick="window.location.href = 'dashboard'">Back to dashboard</button>
+
+    <div id="content_container">
+      <div id="finish_task_header">
+        <p> To-Do List. </p>
+      </div>
+
+      <div id="task_input_container">
+        <input id="input_box" type="text" placeholder="Start A Task"/>
+        <input id="input_date" type="date"/>
+        <button id="input_button" onclick="add_task();">
+          Add Task! <i class="fa fa-arrow-circle-right"></i>
+        </button>
+      </div>
+
+      <!-- Task To Do -->
+      <div class="container"></div>
+
+
+      </div>
+
+
+      <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-app.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-database.js"></script>
+
+        <script>
+        var firebaseConfig = {
+        apiKey: "AIzaSyDZNTsyONAQlE0c_EtoCcyYyZyRWpz6isI",
+        authDomain: "mavra-2355b.firebaseapp.com",
+        databaseURL: "https://mavra-2355b.firebaseio.com",
+        projectId: "mavra-2355b",
+        storageBucket: "mavra-2355b.appspot.com",
+        messagingSenderId: "553724586959",
+        appId: "1:553724586959:web:44ba186b79879703a780ba",
+        measurementId: "G-05JK85SPT1"
+        };
+        // Initialize Firebase/Firestore
+        firebase.initializeApp(firebaseConfig);
+
+        </script>
 
 
     <script src="./todos.js"></script>

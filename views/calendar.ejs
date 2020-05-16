@@ -98,28 +98,12 @@
   </fieldset>
 </div>
 
-<!-- <script type="text/javascript" src="index.js"></script> -->
+
 
 <script>
 window.document.onload = myFunc();
 
-// var firebase = require("firebase");
-// //Web app's Firebase configuration
-// var firebaseConfig = {
-//   apiKey: "AIzaSyDZNTsyONAQlE0c_EtoCcyYyZyRWpz6isI",
-//   authDomain: "mavra-2355b.firebaseapp.com",
-//   databaseURL: "https://mavra-2355b.firebaseio.com",
-//   projectId: "mavra-2355b",
-//   storageBucket: "mavra-2355b.appspot.com",
-//   messagingSenderId: "553724586959",
-//   appId: "1:553724586959:web:487d03cec03e95c9a780ba",
-//   measurementId: "G-R0NXXBGT20"
-// };
-// // Initialize Firebase
-// firebase.initializeApp(firebaseConfig);
-// // var user = firebase.auth().currentUser;
 
-// const db = firebase.firestore();
 
 function closeForm() {
   var x = document.getElementById("formDiv");
@@ -357,13 +341,6 @@ function myFunc() {
     var day = this.current.clone().date(dayNumber);
     var currentOpened = document.querySelector(".details");
 
-    //Check to see if there is an open detais box on the current row
-    // if (currentOpened && currentOpened.parentNode === el.parentNode) {
-    //   details = currentOpened;
-    //   arrow = document.querySelector(".arrow");
-    // } else {
-      //Close the open events on differnt week row
-      //currentOpened && currentOpened.parentNode.removeChild(currentOpened);
       if (currentOpened) {
         currentOpened.addEventListener("webkitAnimationEnd", function() {
           currentOpened.parentNode.removeChild(currentOpened);
@@ -389,11 +366,7 @@ function myFunc() {
 
       var group1 = createElement("div", "detailsHeader");
       var todayDate = createElement("div", "todayDate", el.innerText);
-      //Create the arrow
-      //                            var arrow = createElement('div', 'arrow');
 
-      //Create the event wrapper
-      //                            details.appendChild(arrow);
       group1.appendChild(todayDate);
       details.appendChild(group1);
       el.parentNode.parentNode.insertBefore(
@@ -412,7 +385,7 @@ function myFunc() {
 
     this.renderEvents(todaysEvents, details);
 
-    // arrow.style.left = el.offsetLeft - el.parentNode.offsetLeft + 27 + "px";
+    
   };
 
   Calendar.prototype.renderEvents = function(events, ele) {
@@ -474,30 +447,7 @@ function myFunc() {
     }
   };
 
-  // Calendar.prototype.drawLegend = function() {
-  //   var legend = createElement("div", "legend");
-  //   var calendars = this.events
-  //     .map(function(e) {
-  //       return e.calendar + "|" + e.color;
-  //     })
-  //     .reduce(function(memo, e) {
-  //       if (memo.indexOf(e) === -1) {
-  //         memo.push(e);
-  //       }
-  //       return memo;
-  //     }, [])
-  //     .forEach(function(e) {
-  //       var parts = e.split("|");
-  //       var entry = createElement("span", "entry " + parts[1], parts[0]);
-  //       legend.appendChild(entry);
-  //     });
-  //   var legendDOM = document.getElementsByClassName("legend");
-  //   if (legendDOM.length != 0) {
-  //     this.el.replaceChild(legend, legendDOM[0]);
-  //   } else {
-  //     this.el.appendChild(legend);
-  //   }
-  // };
+
 
   Calendar.prototype.drawButton = function() {
     var addBTN = document.querySelector(".addBTN");
@@ -605,9 +555,7 @@ function myFunc() {
   }
   sessionStorage.setItem("data", JSON.stringify(data));
 
-  /*var data = [
-          {eventName: 'Lunch Meeting 1', calendar: 'Home', color: 'blue', date: '2019-06-25'}
-        ];*/
+
 
   function delEvent(events) {
     var a = data.indexOf(events);
